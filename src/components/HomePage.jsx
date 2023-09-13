@@ -1,21 +1,26 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/Macros.scss";
+import NavBar from './NavBar'
+import FoodModal from './FoodModal'
+import ExerciseModal from './ExerciseModal'
+
+import "../styles/HomePage.scss";
 
 
-function Macros(props){
+function HomePage(props){
     return(
         <> 
         <div className = "macroDisplay">
         <h1>MACRONUTRIENTS</h1>
         </div>
         <div className = "buttonBox"> 
-        <button className ="logButton">Log Food</button>
-        <button className ="logButton">Log Exercise</button>
+        <FoodModal></FoodModal>
+        <ExerciseModal></ExerciseModal>
         </div>
+        <NavBar></NavBar>
         </>
     )
 }
 
-export default Macros;
+export default HomePage;

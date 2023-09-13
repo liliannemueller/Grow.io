@@ -1,10 +1,25 @@
 const path = require('path');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
+require('dotenv/config');
 
-module.exports = {
-  // other webpack configuration settings 
+module.exports = function(webpackEnv) {
+  
+  return {
+    plugins: [
+      new NodePolyfillPlugin(), 
+      new webpackEnv.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      
+    }),
+     new webpackEnv.IgnorePlugin({
+      resourceRegExp: /^path$/, // Exclude the 'path' module from the client bundle
+    }),
+  ],
+    
   target: "node",
   resolve: {
     fallback: {
+        os: { false },
         crypto: require.resolve("crypto-browserify"),
         stream: require.resolve("stream-browserify"),
     }
@@ -36,5 +51,5 @@ module.exports = {
     contentBase: './dist', // Serve files from the 'dist' directory
     port: 8080, // Port for the development server
   },
-
+}
 };
