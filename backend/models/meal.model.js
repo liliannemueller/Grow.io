@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const now = new Date();
 const day = now.toLocaleDateString();
 
-const nutritionSchema = new Schema({
+const mealSchema = new Schema({
   username: { type: String, required: true },
   description: { type: String, required: true },
   Calories: { type: Number },
@@ -21,6 +21,6 @@ const nutritionSchema = new Schema({
 // console.log(typeof day)
 
 
-const Nutrition = mongoose.model('Nutrition', nutritionSchema);
+const Meal = mongoose.model('Meal', mealSchema);
 
-module.exports = Nutrition;
+module.exports = Meal;
