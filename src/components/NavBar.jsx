@@ -13,7 +13,7 @@ function NavBar(props){
         <List>
             <ListItem>
                 <ListItemButton>
-                    <ListItemText></ListItemText>
+                    <ListItemText>MENU</ListItemText>
                 </ListItemButton>
             </ListItem>
         </List>

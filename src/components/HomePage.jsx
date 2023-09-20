@@ -5,14 +5,18 @@ import NavBar from './NavBar'
 import FoodModal from './FoodModal'
 import ExerciseModal from './ExerciseModal'
 
+
 import "../styles/HomePage.scss";
 
 
 function HomePage(props){
     return(
         <> 
+        <header>
+            <NavBar></NavBar>
+        </header>
         <div className = "macroDisplay">
-        <h1>MACRONUTRIENTS</h1>
+        <h1>MACRO CHART</h1>
         </div>
         <div className = "buttonBox"> 
         <FoodModal></FoodModal>

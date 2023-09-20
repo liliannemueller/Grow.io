@@ -39,7 +39,7 @@ router.route('/:id').get((req, res) => {
 });
 router.route('/:id').delete((req, res) => {
   Meal.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Exercise deleted.'))
+    .then(() => res.json('Meal deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 router.route('/update/:id').post((req, res) => {
@@ -47,7 +47,11 @@ router.route('/update/:id').post((req, res) => {
     .then(meal => {
       meal.username = req.body.username;
       meal.description = req.body.description;
-      meal.duration = Number(req.body.duration);
+      meal.calories = Number(req.body.calories);
+      meal.protein = Number(req.body.protein);
+      meal.fats = Number(req.body.fats);
+      meal.carbs = Number(req.body.carbs);
+      meal.fiber = Number(req.body.fiber);
       
       meal.save()
         .then(() => res.json('Meal updated!'))
