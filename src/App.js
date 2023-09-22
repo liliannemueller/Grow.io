@@ -1,22 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import HomePage from "./components/HomePage.jsx"
 import "bootstrap/dist/css/bootstrap.min.css";
-//import scss style sheet
-
 import Navbar from "./components/NavBar.jsx"
+import FoodModal from './components/FoodModal.jsx';
+import ExerciseModal from './components/ExerciseModal.jsx';
+
 
  
 
 function App() {
  return (
   <Router>
-  <div className="container">
-  <br/>
-    
-  </div>
-  <HomePage></HomePage>
-   </Router>
+    <Navbar/>
+   <Routes>
+    <Route exact path="/home" element={<HomePage />}></Route>
+    <Route path="/meals" element={<FoodModal/>}></Route>
+    <Route path="/exercises" element={<ExerciseModal/>}></Route>
+    {/* <Route path="/account"></Route> */}
+    </Routes>
+  </Router>
   
  );
 }
