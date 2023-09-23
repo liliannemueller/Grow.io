@@ -10,15 +10,17 @@ import IconButton from '@mui/material/IconButton'; // Import IconButton
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'; // Import ChevronLeftIcon
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'; 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import '../styles/variables.scss'
+
 
 const theme = createTheme({
   palette: {
     // Customize colors
     primary: {
-      main: '#CCFFc4', //GREEN
+      main: '#caf8c4', //GREEN
     },
     secondary: {
-      main: '#FECDCD', //PINK
+      main: '#5B744B', //PINK
     },
   },
   typography: {
@@ -54,6 +56,7 @@ export default function NavBar(props){
         anchor="left"
         open={open}
         onClose={toggleDrawer(false)}
+        style={{ backgroundColor: theme.palette.secondary.main }}
       >
         <div role="presentation">
           <IconButton onClick={toggleDrawer(false)}>
@@ -64,25 +67,30 @@ export default function NavBar(props){
               <ChevronRightIcon />
             )}
           </IconButton>
-          <List>
+          <List style={{ backgroundColor: theme.palette.secondary.main }}>
             <ListItem>
-              <ListItemButton>
-                <Link to="/home">Home</Link>
+              <ListItemButton >
+                <Link to="/home" style={{ color: theme.palette.primary.main }}>Home</Link>
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton>
-                <Link to="/meals">Meals</Link>
+                <Link to="/meals" style={{ color: theme.palette.primary.main }}>Meals</Link>
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton>
-                <Link to="/exercises">Exercises</Link>
+                <Link to="/exercises" style={{ color: theme.palette.primary.main }}>Exercises</Link>
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton>
-                <Link to="/account">Account</Link>
+                <Link to="/account" style={{ color: theme.palette.primary.main }}>Account</Link>
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+            <ListItemButton>
+                <Link to="/logout" style={{ color: theme.palette.primary.main }}>Logout</Link>
               </ListItemButton>
             </ListItem>
           </List>

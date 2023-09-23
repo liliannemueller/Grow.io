@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/NavBar.jsx"
 import FoodModal from './components/FoodModal.jsx';
 import ExerciseModal from './components/ExerciseModal.jsx';
+import  './styles/variables.scss';
 
 
  

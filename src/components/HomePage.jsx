@@ -4,8 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from './NavBar'
 import FoodModal from './FoodModal'
 import ExerciseModal from './ExerciseModal'
-
-import "../styles/HomePage.scss";
+import '../styles/HomePage.scss'
+import  '../styles/variables.scss';
 
 
 function HomePage(props){
