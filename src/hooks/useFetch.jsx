@@ -11,6 +11,8 @@ const useFetch = (url) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+        "Cross-Origin-Embedder-Policy": "require-corp"
       },
       body: JSON.stringify({ credential: response.credential }),
     });

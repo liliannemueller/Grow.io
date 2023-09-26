@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import '../styles/variables.scss'
 
 const Landing = () => {
   return (
@@ -16,6 +17,7 @@ const Landing = () => {
             padding: "0.5rem 1rem",
             backgroundColor: "wheat",
             color: "#333",
+            borderRadius: "40px"
           }}
         >
           Sign Up
@@ -28,6 +30,7 @@ const Landing = () => {
             padding: "0.5rem 1rem",
             backgroundColor: "whitesmoke",
             color: "#333",
+            borderRadius: "40px"
           }}
         >
           Login

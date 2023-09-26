@@ -9,29 +9,21 @@ import  '../styles/variables.scss';
 
 
 function HomePage({ user }){
-    const logout = () => {
-    localStorage.removeItem("user");
-    window.location.reload();
-  };
     return(
-        // <> 
-        // <div className = "macroDisplay">
-        // <h1>MACRONUTRIENTS</h1>
-        // </div>
-        // <div className = "buttonBox"> 
-        // <FoodModal></FoodModal>
-        // <ExerciseModal></ExerciseModal>
-        // </div>
-        // </>
-         <div style={{ textAlign: "center", margin: "3rem" }}>
-      <h1>Dear {user?.email}</h1>
-
-      <p>
-        Login successful
-      </p>
-
+        
+      <div style={{ textAlign: "center", margin: "3rem" }}>
+      <h1>Welcome {user?.email}</h1>
+         <> 
+         <div className = "macroDisplay">
+        
+         </div>
+         <div className = "buttonBox"> 
+         <FoodModal></FoodModal>
+         <ExerciseModal></ExerciseModal>
+     </div>
+         </>
       <div>
-        <button
+        {/* <button
           onClick={logout}
           style={{
             color: "red",
@@ -42,12 +34,11 @@ function HomePage({ user }){
           }}
         >
           Logout
-        </button>
+        </button> */}
       </div>
     </div>
   );
 };
-//     )
-// }
+
 
 export default HomePage;

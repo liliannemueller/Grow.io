@@ -19,9 +19,7 @@ const SignUp = () => {
       });
 
       google.accounts.id.renderButton(document.getElementById("signUpDiv"), {
-        // type: "standard",
-        theme: "filled_black",
-        // size: "small",
+        theme: "white",
         text: "continue_with",
         shape: "pill",
       });
@@ -32,9 +30,7 @@ const SignUp = () => {
 
   return (
     <>
-      <nav style={{ padding: "2rem" }}>
-        <Link to="/">Go Back</Link>
-      </nav>
+      <br></br>
       <header style={{ textAlign: "center" }}>
         <h1>Register to continue</h1>
       </header>
@@ -46,6 +42,7 @@ const SignUp = () => {
           alignItems: "center",
         }}
       >
+       
         {error && <p style={{ color: "red" }}>{error}</p>}
         {loading ? (
           <div>Loading....</div>
@@ -53,7 +50,11 @@ const SignUp = () => {
           <div id="signUpDiv" data-text="signup_with"></div>
         )}
       </main>
-      <footer></footer>
+      <footer> <nav style={{ padding: "2rem" }}>
+        <Link style={{display:"flex", justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center", textDecoration: "none"}} to="/">Go Back</Link>
+      </nav></footer>
     </>
   );
 };

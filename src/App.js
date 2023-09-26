@@ -25,10 +25,10 @@ function App() {
   <Router>
     <Navbar/>
    <Routes>
-    <Route exact path="/home" element={user?.email ? <HomePage user={user} /> : <Navigate to ="/" />}></Route>
+    <Route exact path="/homepage" element={user?.email ? <HomePage user={user} /> : <Navigate to ="/" />}></Route>
     <Route path="/meals" element={<FoodModal/>}></Route>
     <Route path="/exercises" element={<ExerciseModal/>}></Route>
-    <Route path="/" element={user?.email ? <Navigate to="/home" /> : <Landing/>}></Route>
+    <Route path="/" element={user?.email ? <Navigate to="/homepage" /> : <Landing/>}></Route>
     <Route path="/signup" element={user?.email ? <Navigate to="/signup" /> : <Signup/>}></Route>
     <Route path="/login" element={user?.email ? <Navigate to="/login" /> : <Login/>}></Route>
     </Routes>

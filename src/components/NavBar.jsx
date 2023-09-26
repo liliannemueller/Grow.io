@@ -46,11 +46,16 @@ export default function NavBar(props){
 
     setOpen(open);
   };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    window.location.reload();
+  } 
     return (
          <ThemeProvider theme={theme}>
     <div>
       <IconButton onClick={toggleDrawer(true)}>
-        <MenuIcon /> {/* Menu icon to open the drawer */}
+        <MenuIcon /> 
       </IconButton>
       <Drawer
         anchor="left"
@@ -70,28 +75,26 @@ export default function NavBar(props){
           <List style={{ backgroundColor: theme.palette.secondary.main }}>
             <ListItem>
               <ListItemButton >
-                <Link to="/home" style={{ color: theme.palette.primary.main }}>Home</Link>
+                <Link to="/homepage" style={{ color: theme.palette.primary.main, textDecoration: 'none' }}>Home</Link>
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton>
-                <Link to="/meals" style={{ color: theme.palette.primary.main }}>Meals</Link>
+                <Link to="/meals" style={{ color: theme.palette.primary.main, textDecoration: 'none' }}>Meals</Link>
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton>
-                <Link to="/exercises" style={{ color: theme.palette.primary.main }}>Exercises</Link>
+                <Link to="/exercises" style={{ color: theme.palette.primary.main, textDecoration: 'none' }}>Exercises</Link>
               </ListItemButton>
             </ListItem>
             <ListItem>
               <ListItemButton>
-                <Link to="/account" style={{ color: theme.palette.primary.main }}>Account</Link>
+                <Link to="/account" style={{ color: theme.palette.primary.main, textDecoration: 'none' }}>Account</Link>
               </ListItemButton>
             </ListItem>
             <ListItem>
-            <ListItemButton>
-                <Link to="/logout" style={{ color: theme.palette.primary.main }}>Logout</Link>
-              </ListItemButton>
+            <ListItemButton style={{ color: theme.palette.primary.main }} onClick={logout}>Logout</ListItemButton>
             </ListItem>
           </List>
         </div>
