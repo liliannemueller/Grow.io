@@ -3,13 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    minlength: 3
-  },
+  firstName: {type: String},
+  lastName: {type: String},
+  picture: {type: String},
+  email: {type: String,required: true, unique: true},
+  createdAt: {type: Date, default: Date.now}
 }, {
   timestamps: true,
 });

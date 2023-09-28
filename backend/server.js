@@ -3,6 +3,8 @@ require('dotenv').config({ debug: true })
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const User = require('./models/user.model'); // Adjust the path as needed
+
 
 const { OAuth2Client } = require("google-auth-library");
 const jwt = require("jsonwebtoken");
@@ -20,7 +22,8 @@ app.use(
     origin: ["http://localhost:3000"],
     methods: "GET,POST,PUT,DELETE,OPTIONS",
   })
-);;
+);
+
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
@@ -58,16 +61,22 @@ app.post('/signup', async (req, res) => {
     // console.log({ verified: verifyGoogleToken(req.body.credential) });
     if (req.body.credential) {
       const verificationResponse = await verifyGoogleToken(req.body.credential);
-
       if (verificationResponse.error) {
         return res.status(400).json({
           message: verificationResponse.error,
         });
   }
-  const profile = verificationResponse?.payload;
+      const profile = verificationResponse?.payload;
+      //create new user from profile
+      const newUser = new User({
+        firstName: profile?.given_name,
+        lastName: profile?.family_name,
+        email: profile?.email,
+      });
 
-      DB.push(profile);
-
+      //Save new User
+      await newUser.save();
+      
       res.status(201).json({
         message: "Signup was successful",
         user: {
@@ -80,13 +89,13 @@ app.post('/signup', async (req, res) => {
           }),
         },
       });
+      
     }
   } catch (error) {
     res.status(500).json({
       message: "An error occurred. Registration failed.",
     });
   }
-
 
 })
 app.post("/login", async (req, res) => {
