@@ -12,7 +12,7 @@ function HomePage({ user }){
     return(
         
       <div style={{ textAlign: "center", margin: "3rem" }}>
-      <h1>Welcome {user?.email}</h1>
+      <h1>Welcome {user?.firstName}</h1>
          <> 
          <div className = "macroDisplay">
         
@@ -22,20 +22,7 @@ function HomePage({ user }){
          <ExerciseModal></ExerciseModal>
      </div>
          </>
-      <div>
-        {/* <button
-          onClick={logout}
-          style={{
-            color: "red",
-            border: "1px solid gray",
-            backgroundColor: "white",
-            padding: "0.5rem 1rem",
-            cursor: "pointer",
-          }}
-        >
-          Logout
-        </button> */}
-      </div>
+      
     </div>
   );
 };

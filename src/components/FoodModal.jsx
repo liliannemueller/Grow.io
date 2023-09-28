@@ -11,6 +11,8 @@ import MealForm from './MealForm.jsx'
 export default function FoodModal() {
   
   return (
+    <div className= "meal-container">
    <MealForm></MealForm>
+   </div>
   );
 }

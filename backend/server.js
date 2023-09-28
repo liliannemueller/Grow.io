@@ -66,9 +66,25 @@ app.post('/signup', async (req, res) => {
           message: verificationResponse.error,
         });
   }
-      const profile = verificationResponse?.payload;
-      //create new user from profile
-      
+     const profile = verificationResponse?.payload;
+
+     const existingUser = await User.findOne({ email: profile?.email });
+      //CREATE FUNCTION TO CHECK IF USER ALREADY EXISTS IN DB
+      if(existingUser){
+          const token = jwt.sign({ email: profile?.email }, 'mySecret', {
+          expiresIn: "1d",
+        });
+        res.status(200).json({
+          message: "Login was successful",
+          user: {
+            firstName: profile?.given_name,
+            lastName: profile?.family_name,
+            picture: profile?.picture,
+            email: profile?.email,
+            token: token, //generated token
+          },
+        });
+      } else {
       //create new user from profile 
       const newUser = new User({
         username: profile?.name,
@@ -79,7 +95,6 @@ app.post('/signup', async (req, res) => {
       });
       
       //Save new User
-      console.log(newUser.save())
       await newUser.save();
       
       res.status(201).json({
@@ -95,8 +110,8 @@ app.post('/signup', async (req, res) => {
           }),
         },
       });
-      
     }
+  }
   } catch (error) {
     res.status(500).json({
       message: "An error occurred. Registration failed.",
