@@ -15,7 +15,7 @@ const port = process.env.PORT || 5000;
 
 //app.use(cors());
 app.use(express.json());
-let DB = []
+
 
 app.use(
   cors({
@@ -68,23 +68,29 @@ app.post('/signup', async (req, res) => {
   }
       const profile = verificationResponse?.payload;
       //create new user from profile
+      
+      //create new user from profile 
       const newUser = new User({
+        username: profile?.name,
         firstName: profile?.given_name,
         lastName: profile?.family_name,
         email: profile?.email,
+        picture: profile?.picture
       });
-
+      
       //Save new User
+      console.log(newUser.save())
       await newUser.save();
       
       res.status(201).json({
         message: "Signup was successful",
         user: {
+          username: profile?.given_name,
           firstName: profile?.given_name,
           lastName: profile?.family_name,
           picture: profile?.picture,
           email: profile?.email,
-          token: jwt.sign({ email: profile?.email }, "myScret", {
+          token: jwt.sign({ email: profile?.email }, "mySecret", {
             expiresIn: "1d",
           }),
         },
@@ -108,31 +114,39 @@ app.post("/login", async (req, res) => {
           message: verificationResponse.error,
         });
       }
-
       const profile = verificationResponse?.payload;
+      // console.log("login profile: ", profile)
+      const existingUser = await User.findOne({ email: profile?.email });
 
-      const existsInDB = DB.find((person) => person?.email === profile?.email);
-
-      if (!existsInDB) {
-        return res.status(400).json({
-          message: "You are not registered. Please sign up",
+      if (existingUser) {
+        // User exists, generate a token and return a successful login response
+        const token = jwt.sign({ email: profile?.email }, 'mySecret', {
+          expiresIn: "1d",
+        });
+        res.status(200).json({
+          message: "Login was successful",
+          user: {
+            firstName: profile?.given_name,
+            lastName: profile?.family_name,
+            picture: profile?.picture,
+            email: profile?.email,
+            token: token, //generated token
+          },
+        });
+      } else {
+        // User does not exist, prompt them to sign up
+        res.status(400).json({
+          message: "User not found. Please sign up.",
         });
       }
-
-      res.status(201).json({
-        message: "Login was successful",
-        user: {
-          firstName: profile?.given_name,
-          lastName: profile?.family_name,
-          picture: profile?.picture,
-          email: profile?.email,
-          token: jwt.sign({ email: profile?.email }, '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', {
-            expiresIn: "1d",
-          }),
-        },
+    } else {
+      // Invalid request, missing credential
+      res.status(400).json({
+        message: "Invalid request. Missing credential.",
       });
     }
   } catch (error) {
+    // Handle any unexpected errors
     res.status(500).json({
       message: error?.message || error,
     });
