@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/NavBar.jsx"
 import FoodModal from './components/FoodModal.jsx';
 import ExerciseModal from './components/ExerciseModal.jsx';
-import  './styles/variables.scss';
+import  './styles/variables.scss'
 import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
