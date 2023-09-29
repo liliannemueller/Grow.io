@@ -6,7 +6,6 @@ const now = new Date();
 const day = now.toLocaleDateString();
 
 const mealSchema = new Schema({
-  username: { type: String, required: true },
   description: { type: String, required: true },
   Calories: { type: Number },
   Protein: { type: Number },
