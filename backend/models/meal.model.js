@@ -6,7 +6,8 @@ const now = new Date();
 const day = now.toLocaleDateString();
 
 const mealSchema = new Schema({
-  description: { type: String, required: true },
+  // User: {type: String},
+  Description: { type: String},
   Calories: { type: Number },
   Protein: { type: Number },
   Fats: { type: Number },
@@ -17,7 +18,7 @@ const mealSchema = new Schema({
     timestamps: true,
 });
 
-// console.log(typeof day)
+
 
 
 const Meal = mongoose.model('Meal', mealSchema);

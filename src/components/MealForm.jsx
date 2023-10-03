@@ -10,6 +10,8 @@ import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
 import '../styles/variables.scss'
 
+
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -24,31 +26,37 @@ const style = {
 
 
 export default function MealForm(props){
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-    const [formData, setFormData] = React.useState({
-    calories: '',
-    protein: '',
-    fats: '',
-    carbs: '',
-    fiber: '',
+  const [formData, setFormData] = React.useState({
+    Description: '',
+    Calories: 0,
+    Protein: 0,
+    Fats: 0,
+    Carbs: 0,
+    Fiber: 0,
   });
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-    const handleInputChange = (event) => {
+  const handleInputChange = (event) => {
     const { id, value } = event.target;
     setFormData({
       ...formData,
       [id]: value,
     });
   };
+  const handleDescriptionChange = (event) => {
+    event.target.id = "Description";
+    handleInputChange(event); 
+  }
 
-    const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+      
     try {
-      // Send the form data to your server using a POST request
-      const response = await fetch('/meals/add', {
+      const response = await fetch('http://localhost:3000/meals/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,10 +65,8 @@ export default function MealForm(props){
       });
 
       if (response.ok) {
-        // Handle a successful response (e.g., show a success message)
         console.log('Meal logged successfully!');
       } else {
-        // Handle an error response (e.g., show an error message)
         console.error('Failed to log meal');
       }
 
@@ -71,94 +77,89 @@ export default function MealForm(props){
     }
   };
     return (
-         <div>
-      <Button className = "modalButton" onClick={handleOpen}>Log Meal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Log your meal
-          </Typography>
-              <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Which Meal?</InputLabel>
-      <Select
-        labelId="meal-type"
-        id="meal-description"
-        value={formData.description}
-        label="description"
-        
-      >
-        <MenuItem value={formData.description}>Breakfast</MenuItem>
-        <MenuItem value={formData.description}>Lunch</MenuItem>
-        <MenuItem value={formData.description}>Dinner</MenuItem>
-        <MenuItem value={formData.description}>Snack</MenuItem>
-        <MenuItem value={formData.description}>Pre/Post Workout</MenuItem>
-      </Select>
-    </FormControl>
-             <Box
-              component="form"
-              sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
+      <div>
+        <Button className ="modalButton" onClick={handleOpen}>Log Meal</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Log your meal
+            </Typography>
+      <FormControl fullWidth>
+        <InputLabel id="Description-label">Which Meal?</InputLabel>
+        <Select
+          defaultValue = "" 
+          labelId="Description-label"
+          id="Description"
+          name="Description"
+          value={formData.Description}
+          label="Meal"
+          onChange={handleDescriptionChange}
+        >
+          <MenuItem className="menu-item" value={"Breakfast"}>Breakfast</MenuItem>
+          <MenuItem className="menu-item" value={"Lunch"}>Lunch</MenuItem>
+          <MenuItem className="menu-item" value={"Dinner"}>Dinner</MenuItem>
+          <MenuItem className="menu-item" value={"Snack"}>Snack</MenuItem>
+          <MenuItem className="menu-item" value={"Pre/Post Workout"}>Pre/Post Workout</MenuItem>
+        </Select>
+      </FormControl>
+              <Box
+                component="form"
+                sx={{
+                  '& > :not(style)': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="on"
+              >
+                <TextField
+                id="Calories"
+                label="Calories"
+                variant="outlined"
+                value={formData.Calories}
+                onChange={handleInputChange}
+              />
               <TextField
-              id="description"
-              label="Description"
-              variant="outlined"
-              value={formData.description}
-              onChange={handleInputChange}
-            />
+                id="Protein"
+                label="Protein"
+                variant="outlined"
+                value={formData.Protein}
+                onChange={handleInputChange}
+              />
               <TextField
-              id="calories"
-              label="Calories"
-              variant="outlined"
-              value={formData.calories}
-              onChange={handleInputChange}
-            />
-            <TextField
-              id="protein"
-              label="Protein"
-              variant="outlined"
-              value={formData.protein}
-              onChange={handleInputChange}
-            />
-            <TextField
-              id="fats"
-              label="Fats"
-              variant="outlined"
-              value={formData.fats}
-              onChange={handleInputChange}
-            />
-            <TextField
-              id="carbs"
-              label="Carbs"
-              variant="outlined"
-              value={formData.carbs}
-              onChange={handleInputChange}
-            />
-            <TextField
-              id="fiber"
-              label="Fiber"
-              variant="outlined"
-              value={formData.fiber}
-              onChange={handleInputChange}
-            />
-            <Button
-              id="submit-button"
-              style={{ background: 'black' }}
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-            </Box>
-        </Box>
-      </Modal>
+                id="Fats"
+                label="Fats"
+                variant="outlined"
+                value={formData.Fats}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="Carbs"
+                label="Carbs"
+                variant="outlined"
+                value={formData.Carbs}
+                onChange={handleInputChange}
+              />
+              <TextField
+                id="Fiber"
+                label="Fiber"
+                variant="outlined"
+                value={formData.Fiber}
+                onChange={handleInputChange}
+              />
+              <Button
+                id="submit-button"
+                style={{ background: 'black' }}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+              </Box>
+          </Box>
+        </Modal>
     </div>
     )
 };

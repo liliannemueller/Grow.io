@@ -40,8 +40,8 @@ async function verifyGoogleToken(token) {
 }
 
 const uri = process.env.REACT_APP_URI
-mongoose.connect(uri, { }
-);
+
+mongoose.connect(uri, { });
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
